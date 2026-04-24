@@ -53,6 +53,17 @@ public:
 		const float Duration = 0.0f, const bool bPersistent = false);
 
 	UFUNCTION(BlueprintCallable, Category = "Async Physics Debug Draw",
+		meta = (WorldContext = "WorldContextObject", BlueprintThreadSafe, DisplayName = "APDD Add Box"))
+	static void AddDebugBox(UObject* WorldContextObject, UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category,
+		const FVector Center, const FVector HalfExt, const FRotator& R, const float Thickness = 1.0f, const bool bPersistent = false);
+
+	UFUNCTION(BlueprintCallable, Category = "Async Physics Debug Draw",
+		meta = (WorldContext = "WorldContextObject", BlueprintThreadSafe, DisplayName = "APDD Add Box Explicit"))
+	static void AddDebugBoxExplicit(UObject* WorldContextObject, UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category,
+	    const FVector Center, const FVector HalfExt, const FRotator& R, const FLinearColor Color, const float Thickness = 1.0f,
+	    const float Duration = 0.0f, const bool bPersistent = false);
+
+	UFUNCTION(BlueprintCallable, Category = "Async Physics Debug Draw",
 		meta = (WorldContext = "WorldContextObject", BlueprintThreadSafe))
 	static void UnregisterOwner(UObject* WorldContextObject, UObject* Owner);
 };

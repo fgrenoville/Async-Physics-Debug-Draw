@@ -52,6 +52,10 @@ struct FAsyncPhysicsDebugDrawExec
 				case EAsyncPhysicsDebugDrawShape::Arrow:
 					DrawDebugDirectionalArrow(World, Cmd.P0, Cmd.P1, Cmd.ArrowSize, Cmd.Color, Cmd.bPersistent, ScaledDuration, 0, Cmd.Thickness);
 					break;
+
+				case EAsyncPhysicsDebugDrawShape::Box:
+					DrawDebugBox(World, Cmd.P0, Cmd.HalfExtent, Cmd.Rot.Quaternion(), Cmd.Color, Cmd.bPersistent, ScaledDuration, 0, Cmd.Thickness);
+					break;
 			}
 		}
 #endif

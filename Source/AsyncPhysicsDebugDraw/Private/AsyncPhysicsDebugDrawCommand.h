@@ -26,7 +26,9 @@ struct FAsyncPhysicsDebugDrawCommand
 	FVector P1 = FVector::ZeroVector;
 	float Radius = 0.f;
 	float ArrowSize = 20.f;
-
+	FVector HalfExtent = FVector::ZeroVector;
+	FRotator Rot = FRotator::ZeroRotator;
+	
 	FColor Color = FColor::White;
 	float Thickness = 1.f;
 	float Duration = 0.f;
@@ -71,6 +73,22 @@ struct FAsyncPhysicsDebugDrawCommand
 		Cmd.P0 = A;
 		Cmd.P1 = B;
 		Cmd.ArrowSize = InArrowSize;
+		Cmd.Color = InColor;
+		Cmd.Thickness = InThickness;
+		Cmd.Duration = InDuration;
+		Cmd.bPersistent = bInPersistent;
+		return Cmd;
+	}
+
+	static FAsyncPhysicsDebugDrawCommand MakeDebugBox(const FVector& Center, const FVector& HalfExt, const FRotator& R, const FColor InColor,
+		const float InThickness, const float InDuration, const FAsyncPhysicsDebugDrawCategoryHandle InCategory, const bool bInPersistent = false)
+	{
+		FAsyncPhysicsDebugDrawCommand Cmd;
+		Cmd.Shape = EAsyncPhysicsDebugDrawShape::Box;
+		Cmd.Category = InCategory;
+		Cmd.P0 = Center;
+		Cmd.HalfExtent = HalfExt;
+		Cmd.Rot = R;
 		Cmd.Color = InColor;
 		Cmd.Thickness = InThickness;
 		Cmd.Duration = InDuration;

@@ -22,7 +22,7 @@ struct FAsyncPhysicsDebugDrawSourceData;
  * Typical usage:
  *  - Register a source through the subsystem in BeginPlay / initialization.
  *  - Cache category handles once.
- *  - Call AddLine / AddSphere / AddArrow from simulation code.
+ *  - Call AddLine / AddSphere / AddArrow / AddBox from simulation code.
  *  - Unregister the source when the owner is destroyed.
  */
 class ASYNCPHYSICSDEBUGDRAW_API FAsyncPhysicsDebugDrawSource
@@ -58,6 +58,11 @@ public:
 		const float ArrowSize = 20.0f, const float Thickness = 1.0f, const bool bPersistent = false) const;
 	void AddDebugArrow(const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& A, const FVector& B, const float ArrowSize,
 		const FColor Color, const float Thickness, const float Duration, const bool bPersistent = false) const;
+
+	void AddDebugBox(const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& Center, const FVector& HalfExt,
+	                 const FRotator& R, const float Thickness = 1.0f, const bool bPersistent = false) const;
+	void AddDebugBox(const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& Center, const FVector& HalfExt,
+	                 const FRotator& R, const FColor Color, const float Thickness, const float Duration, const bool bPersistent = false) const;
 
 private:
 	TSharedPtr<FAsyncPhysicsDebugDrawSourceData, ESPMode::ThreadSafe> Data;

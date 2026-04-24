@@ -1,14 +1,13 @@
 {
 	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
+	"Version": 2,
+	"VersionName": "1.1",
 	"FriendlyName": "Async Physics Debug Draw",
 	"Description": "Thread-safe debug drawing for UE5 async physics, with runtime categories and console controls.",
 	"Category": "Debug",
 	"CreatedBy": "Federico Grenoville",
-	"CreatedByURL": "",
-	"DocsURL": "",
-	"MarketplaceURL": "",
+	"DocsURL": "https://drive.google.com/file/d/1-sZipOTD6CzcFWuJ86paR3MDist_S9A1/view?usp=sharing",
+	"FabURL": "",
 	"SupportURL": "",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
@@ -18,7 +17,9 @@
 		{
 			"Name": "AsyncPhysicsDebugDraw",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+            "PlatformAllowList": [ "Win64", "Linux", "Mac", "Android", "IOS" ],
+            "PlatformDenyList": [ ]
 		}
 	]
 }

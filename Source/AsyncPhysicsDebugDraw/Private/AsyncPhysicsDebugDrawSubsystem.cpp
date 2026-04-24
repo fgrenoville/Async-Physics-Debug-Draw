@@ -193,6 +193,41 @@ void UAsyncPhysicsDebugDrawSubsystem::AddArrowForOwner(UObject* Owner, const FAs
 	Source->PendingStream.Add(Cmd);
 }
 
+void UAsyncPhysicsDebugDrawSubsystem::AddBoxForOwner(UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category,
+	const FVector& Center, const FVector& HalfExt, const FRotator& R, const float Thickness, const bool bPersistent)
+{
+	if (!Owner)
+		return;
+
+	const TSharedPtr<FAsyncPhysicsDebugDrawSourceData, ESPMode::ThreadSafe> Source = FindOrAddSourceData(Owner);
+
+	FColor DefaultColor = FColor::White;
+	float DefaultLifetime = 0.0f;
+	FAsyncPhysicsDebugDrawModule::Get().GetCategoryDefaults(Category, DefaultColor, DefaultLifetime);
+
+	const FAsyncPhysicsDebugDrawCommand Cmd =
+		FAsyncPhysicsDebugDrawCommand::MakeDebugBox(Center, HalfExt, R, DefaultColor, Thickness, DefaultLifetime, Category, bPersistent);
+
+	FScopeLock SourceLock(&Source->Mutex);
+	Source->PendingStream.Add(Cmd);
+}
+
+void UAsyncPhysicsDebugDrawSubsystem::AddBoxForOwner(UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category,
+	const FVector& Center, const FVector& HalfExt, const FRotator& R, const FColor Color, const float Thickness, const float Duration,
+	const bool bPersistent)
+{
+	if (!Owner)
+		return;
+
+	const TSharedPtr<FAsyncPhysicsDebugDrawSourceData, ESPMode::ThreadSafe> Source = FindOrAddSourceData(Owner);
+
+	const FAsyncPhysicsDebugDrawCommand Cmd =
+		FAsyncPhysicsDebugDrawCommand::MakeDebugBox(Center, HalfExt, R, Color, Thickness, Duration, Category, bPersistent);
+
+	FScopeLock SourceLock(&Source->Mutex);
+	Source->PendingStream.Add(Cmd);
+}
+
 void UAsyncPhysicsDebugDrawSubsystem::UnregisterOwner(const UObject* Owner)
 {
 	if (!Owner)

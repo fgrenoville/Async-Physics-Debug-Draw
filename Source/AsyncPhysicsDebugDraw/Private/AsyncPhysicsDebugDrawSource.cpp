@@ -85,3 +85,27 @@ void FAsyncPhysicsDebugDrawSource::AddDebugArrow(const FAsyncPhysicsDebugDrawCat
 	FScopeLock Lock(&Data->Mutex);
 	Data->PendingStream.Add(Cmd);
 }
+
+void FAsyncPhysicsDebugDrawSource::AddDebugBox(const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& Center,
+	const FVector& HalfExt, const FRotator& R, const float Thickness, const bool bPersistent) const
+{
+	FColor DefaultColor = FColor::White;
+	float DefaultLifetime = 0.0f;
+
+	FAsyncPhysicsDebugDrawModule::Get().GetCategoryDefaults(Category, DefaultColor, DefaultLifetime);
+
+	AddDebugBox(Category, Center, HalfExt, R, DefaultColor, Thickness, DefaultLifetime, bPersistent);
+}
+
+void FAsyncPhysicsDebugDrawSource::AddDebugBox(const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& Center, const FVector& HalfExt,
+	const FRotator& R, const FColor Color, const float Thickness, const float Duration, const bool bPersistent) const
+{
+	if (!Data.IsValid())
+		return;
+
+	const FAsyncPhysicsDebugDrawCommand Cmd =
+		FAsyncPhysicsDebugDrawCommand::MakeDebugBox(Center, HalfExt, R, Color, Thickness, Duration, Category, bPersistent);
+
+	FScopeLock Lock(&Data->Mutex);
+	Data->PendingStream.Add(Cmd);
+}

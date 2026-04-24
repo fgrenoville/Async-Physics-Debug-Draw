@@ -81,6 +81,28 @@ void UAsyncPhysicsDebugDrawBlueprintLibrary::AddDebugArrowExplicit(UObject* Worl
 		.AddArrowForOwner(Owner, Category, Start, End, ArrowSize, Color.ToFColor(true), Thickness, Duration, bPersistent);
 }
 
+void UAsyncPhysicsDebugDrawBlueprintLibrary::AddDebugBox(UObject* WorldContextObject, UObject* Owner,
+	const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector Center, const FVector HalfExt, const FRotator& R,
+	const float Thickness, const bool bPersistent)
+{
+	if (!WorldContextObject || !Owner || !Category.IsValid())
+		return;
+
+	UAsyncPhysicsDebugDrawSubsystem::Get(WorldContextObject)
+		.AddBoxForOwner(Owner, Category, Center, HalfExt, R, Thickness, bPersistent);
+}
+
+void UAsyncPhysicsDebugDrawBlueprintLibrary::AddDebugBoxExplicit(UObject* WorldContextObject, UObject* Owner,
+	const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector Center, const FVector HalfExt, const FRotator& R,
+	const FLinearColor Color, const float Thickness, const float Duration, const bool bPersistent)
+{
+	if (!WorldContextObject || !Owner || !Category.IsValid())
+		return;
+
+	UAsyncPhysicsDebugDrawSubsystem::Get(WorldContextObject)
+		.AddBoxForOwner(Owner, Category, Center, HalfExt, R, Color.ToFColor(true), Thickness, Duration, bPersistent);
+}
+
 void UAsyncPhysicsDebugDrawBlueprintLibrary::UnregisterOwner(UObject* WorldContextObject, UObject* Owner)
 {
 	if (!WorldContextObject || !Owner)

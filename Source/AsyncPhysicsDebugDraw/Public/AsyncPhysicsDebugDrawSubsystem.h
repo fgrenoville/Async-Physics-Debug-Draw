@@ -50,6 +50,11 @@ public:
 	void AddArrowForOwner(UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category,
 		const FVector& A, const FVector& B, const float ArrowSize, const FColor Color, const float Thickness,
 		const float Duration, const bool bPersistent = false);
+	void AddBoxForOwner(UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& Center,
+	                    const FVector& HalfExt, const FRotator& R, const float Thickness = 1.0f, const bool bPersistent = false);
+	void AddBoxForOwner(UObject* Owner, const FAsyncPhysicsDebugDrawCategoryHandle Category, const FVector& Center,
+	                    const FVector& HalfExt, const FRotator& R, const FColor Color, const float Thickness,
+	                    const float Duration, const bool bPersistent = false);
 	void UnregisterOwner(const UObject* Owner);
 	
 protected:
